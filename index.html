@@ -16,7 +16,7 @@
     <div class="wrapper">
       <header>
         <h1>Loopback-ng-boilerplate</h1>
-        <p>n application skeleton for a typical Loopback+AngularJS web app using ng-boilerplate</p>
+        <p>An application skeleton for a typical Loopback+AngularJS web app using ng-boilerplate</p>
 
         <p class="view"><a href="https://github.com/carlodicelico/loopback-ng-boilerplate">View the Project on GitHub <small>carlodicelico/loopback-ng-boilerplate</small></a></p>
 
@@ -28,37 +28,60 @@
         </ul>
       </header>
       <section>
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+        <h1>
+<a name="loopback-ng-boilerplate" class="anchor" href="#loopback-ng-boilerplate"><span class="octicon octicon-link"></span></a>loopback-ng-boilerplate</h1>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>This project is an application skeleton for a typical <strong>Loopback+AngularJS</strong> web app, which you can use
+to quickly bootstrap your own projects. It brings together <a href="http://loopback.io">Loopback</a> and
+<a href="https://joshdmiller.github.io/ng-boilerplate">ng-boilerplate</a>.</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<h2>
+<a name="quick-start" class="anchor" href="#quick-start"><span class="octicon octicon-link"></span></a>Quick Start</h2>
+
+<p><strong>Note:</strong> Hopefully, you have your environment set up such that you don't need sudo to do <code>npm</code> anything
+but if not, just add sudo where appropriate.</p>
+
+<pre lang="shell"><code>mkdir myApp &amp;&amp; cd myApp
+git clone https://carlodicelico.github.com/loopback-ng-boilerplate .
+cd server &amp;&amp; npm install
+cd ../client &amp;&amp; npm install &amp;&amp; bower install
+grunt compile
+node ../server/app
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>Go to <a href="http://localhost:3000">http://localhost:3000</a>. You'll probably also want to change the
+names <code>myApp</code> and <code>ngBoilerplate</code> to your own app's name throughout.</p>
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<h2>
+<a name="structure" class="anchor" href="#structure"><span class="octicon octicon-link"></span></a>Structure</h2>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>The project is set up with two completely independent directories - <code>/client</code> and <code>/server</code>. They're
+both already set up with individual <code>.gitignore</code> files. This is so that you can split these up into
+two separate git repos if you prefer.</p>
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<p>In <code>/server</code> is a barebones loopback API. There's nothing more here than whatever is normally generated
+by <code>slc lb project myApp</code> except that <code>app.js</code> has been set up to serve the AngularJS app when <code>/</code> is
+requested. Loopback will look for the <code>index.html</code> file in <code>/client/bin</code>, where your compiled and
+minified sources will be located in production, and automatically serve it to the client.</p>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p>In <code>/client</code>, <code>grunt-loopback-angular</code> and <code>grunt-docular</code> have been installed and a grunt task called
+<code>loopback</code> registered in <code>Gruntfile.js</code>. The <code>loopback</code> task has been added to <code>default</code> so that besides
+being available via <code>grunt loopback</code>, it will automatically run when you do <code>grunt</code>. An initial
+<code>lb-services.js</code> file has been generated and injected as a dependency of the angular app.</p>
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p>If you want to work on the client-side app only, you can do so just as you
+normally would with <code>ng-boilerplate</code> - run <code>grunt watch</code> and open <code>/client/src/index.html</code> in your
+browser.</p>
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<p>When you're ready to deploy, you can do <code>grunt compile</code> and <code>node ../server/app</code>, do a quick
+once-over, and push according to your deployment process. All you need to push to production is <code>/server</code>
+and <code>/client/bin</code>.</p>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<p>For information specific to <a href="http://loopback.io">Loopback</a> or
+<a href="https://joshdmiller.github.io/ng-boilerplate">ng-boilerplate</a>, see their respective documentation.</p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/carlodicelico">carlodicelico</a></p>
